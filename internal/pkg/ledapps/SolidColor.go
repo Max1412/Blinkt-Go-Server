@@ -1,4 +1,4 @@
-package ledApps
+package ledapps
 
 import . "github.com/alexellis/blinkt_go"
 

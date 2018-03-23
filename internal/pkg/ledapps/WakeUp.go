@@ -1,4 +1,4 @@
-package ledApps
+package ledapps
 
 import (
 	"time"

@@ -1,4 +1,4 @@
-package server_backend
+package serverbackend
 
 import (
 	"fmt"
@@ -6,8 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Max1412/blinkt_server/internal/pkg/ledApps"
-
+	"github.com/Max1412/blinkt_server/internal/pkg/ledapps"
 	"github.com/alexellis/blinkt_go"
 )
 
@@ -42,7 +41,7 @@ func waitTimeout(wg *sync.WaitGroup, timeout time.Duration) bool {
 
 // executes something that is passed asnychronously and can be stopped
 // loopFunc must not contain any endlessly running loops
-func executeStoppable(lApp ledApps.LedAppInterface, wg *sync.WaitGroup) {
+func executeStoppable(lApp ledapps.LedAppInterface, wg *sync.WaitGroup) {
 	// signal being done
 	defer wg.Done()
 
@@ -68,7 +67,7 @@ func HandlerLEDSolidColor(w http.ResponseWriter, r *http.Request) {
 	if waitTimeout(&ledWG, time.Second) {
 		fmt.Fprintf(w, "There is already a LED task running or stuck")
 	} else {
-		blinktApp := &ledApps.SolidColor{}
+		blinktApp := &ledapps.SolidColor{}
 		ledWG.Add(1)
 		go executeStoppable(blinktApp, &ledWG)
 		fmt.Fprintf(w, "Started LED task")
@@ -80,7 +79,7 @@ func HandlerLEDProgress(w http.ResponseWriter, r *http.Request) {
 	if waitTimeout(&ledWG, time.Second) {
 		fmt.Fprintf(w, "There is already a LED task running or stuck")
 	} else {
-		blinktApp := &ledApps.Progress{}
+		blinktApp := &ledapps.Progress{}
 		ledWG.Add(1)
 		go executeStoppable(blinktApp, &ledWG)
 		fmt.Fprintf(w, "Started LED task")
@@ -92,7 +91,7 @@ func HandlerLEDWakeUp(w http.ResponseWriter, r *http.Request) {
 	if waitTimeout(&ledWG, time.Second) {
 		fmt.Fprintf(w, "There is already a LED task running or stuck")
 	} else {
-		blinktApp := &ledApps.WakeUp{}
+		blinktApp := &ledapps.WakeUp{}
 		ledWG.Add(1)
 		go executeStoppable(blinktApp, &ledWG)
 		fmt.Fprintf(w, "Started LED task")

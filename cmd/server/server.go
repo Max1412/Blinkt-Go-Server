@@ -5,20 +5,20 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Max1412/blinkt_server/internal/app/server_backend"
+	"github.com/Max1412/blinkt_server/internal/app/serverbackend"
 )
 
 func main() {
-	defer server_backend.LedCleaner()
+	defer serverbackend.LedCleaner()
 
 	fmt.Println("Starting server...")
 
-	http.HandleFunc("/", server_backend.Handler)
+	http.HandleFunc("/", serverbackend.Handler)
 
-	http.HandleFunc("/SolidColor/", server_backend.HandlerLEDSolidColor)
-	http.HandleFunc("/Progress/", server_backend.HandlerLEDProgress)
-	http.HandleFunc("/WakeUp/", server_backend.HandlerLEDWakeUp)
+	http.HandleFunc("/SolidColor/", serverbackend.HandlerLEDSolidColor)
+	http.HandleFunc("/Progress/", serverbackend.HandlerLEDProgress)
+	http.HandleFunc("/WakeUp/", serverbackend.HandlerLEDWakeUp)
 
-	http.HandleFunc("/stop/", server_backend.HandlerStopAsync)
+	http.HandleFunc("/stop/", serverbackend.HandlerStopAsync)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

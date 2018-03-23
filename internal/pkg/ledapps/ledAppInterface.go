@@ -1,4 +1,4 @@
-package ledApps
+package ledapps
 
 type LedAppInterface interface {
     Setup()
